@@ -6,6 +6,7 @@ import {
   Button,
   Alert,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 import NumberContainer from "../components/NumberContainer";
@@ -66,10 +67,10 @@ const GameScreen = (props) => {
     setPastGuesses((currentpassguesses) => [nextNumber, ...currentpassguesses]);
   };
 
-  const renderListItem = (value, numberOfRound) => (
-    <View style={styles.listItem} key={value}>
-      <BodyText>#{numberOfRound}</BodyText>
-      <BodyText>{value}</BodyText>
+  const renderListItem = (listlength, itemData) => (
+    <View style={styles.listItem}>
+      <BodyText>#{listlength - itemData.index}</BodyText>
+      <BodyText>{itemData.item}</BodyText>
     </View>
   );
 
@@ -86,11 +87,16 @@ const GameScreen = (props) => {
         </MainButton>
       </Card>
       <View style={styles.listContainer}>
-        <ScrollView contentContainerStyle={styles.list}>
+        <FlatList
+          data={PastGuesses}
+          keyExtractor={(item) => item}
+          renderItem={renderListItem.bind(this, PastGuesses.length)}
+          contentContainerStyle={styles.list}
+        >
           {PastGuesses.map((guess, index) =>
             renderListItem(guess, PastGuesses.length - index)
           )}
-        </ScrollView>
+        </FlatList>
       </View>
     </View>
   );
@@ -109,12 +115,11 @@ const styles = StyleSheet.create({
     width: 400,
     maxWidth: "80%",
   },
-  listContainer: { width: "80%", flex: 1 },
+  listContainer: { width: "60%", flex: 1 },
   list: {
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "flex-end",
     flexGrow: 1,
-    width: "100%",
   },
   listItem: {
     borderColor: "#ccc",
@@ -124,6 +129,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "100%",
   },
 });
 

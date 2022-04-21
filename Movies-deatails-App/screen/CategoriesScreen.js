@@ -1,21 +1,36 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { CATEGORIES } from "../Data/dummy-data";
 
 const CategoriesScreen = (props) => {
+  const renderFGridItem = (itemData) => {
+    return (
+      <TouchableOpacity style={styles.gridItem} onPress={()=>{props.navigation.navigate('MovieCategory')}}>
+        <View >
+          <Text>{itemData.item.title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Category Screen</Text>
-      <Button title="Go To next" onPress={()=>{props.navigation.navigate('MovieCategory')}} />
-    </View>
+    <FlatList numColumns={2} renderItem={renderFGridItem} data={CATEGORIES} />
   );
 };
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-    
-})
+  gridItem: { margin: 15, flex: 1, height: 150 },
+});
 export default CategoriesScreen;

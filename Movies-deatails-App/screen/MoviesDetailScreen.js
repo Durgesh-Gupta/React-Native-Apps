@@ -1,14 +1,20 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const MoviesDetailScreen = (props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Movies Details Screen</Text>
+
     </View>
   );
 };
 const styles=StyleSheet.create({
-    
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  }, 
 })
 export default MoviesDetailScreen;

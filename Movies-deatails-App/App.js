@@ -9,6 +9,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CategoriesScreen from "./screen/CategoriesScreen";
 import CategoryMoviesScreen from "./screen/CategoryMoviesScreen";
 import MoviesDetailScreen from "./screen/MoviesDetailScreen";
+import Colors from "./Constants/Colors";
+import MoviesNavigator from "./Navigation/MoviesNavigator";
+import { enableScreens } from "react-native-screens";
 
 const fetchFont = () => {
   return Fonts.loadAsync({
@@ -20,6 +23,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontLoaded, setfontLoaded] = useState(false);
+  enableScreens()
   if (!fontLoaded) {
     return (
       <AppLoading
@@ -31,13 +35,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={CategoriesScreen} />
-        <Stack.Screen name="MovieCategory" component={CategoryMoviesScreen} />
-        <Stack.Screen name="MovieDetails" component={MoviesDetailScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <MoviesNavigator/>
 
   );
 }

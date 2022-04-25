@@ -12,9 +12,16 @@ import { CATEGORIES } from "../Data/dummy-data";
 const CategoriesScreen = (props) => {
   const renderFGridItem = (itemData) => {
     return (
-      <TouchableOpacity style={styles.gridItem} onPress={()=>{props.navigation.navigate('MovieCategory')}}>
-        <View >
-          <Text>{itemData.item.title}</Text>
+      <TouchableOpacity
+        style={styles.gridItem}
+        onPress={() => {
+          props.navigation.navigate("MovieCategory", {
+            MoviesId: itemData.item.id,
+          });
+        }}
+      >
+        <View>
+          <Text>{itemData.item.title}1</Text>
         </View>
       </TouchableOpacity>
     );
@@ -24,6 +31,7 @@ const CategoriesScreen = (props) => {
     <FlatList numColumns={2} renderItem={renderFGridItem} data={CATEGORIES} />
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

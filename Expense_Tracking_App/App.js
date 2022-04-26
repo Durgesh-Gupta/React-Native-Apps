@@ -17,6 +17,8 @@ function ExpensesOverview() {
       screenOptions={{
         headerStyle: { backgroundColor: Colors.Primary },
         headerTintColor: Colors.TextHeading,
+        tabBarStyle:{ backgroundColor: Colors.Primary },
+        tabBarActiveTintColor:Colors.Secondary
       }}
     >
       <BottomTabs.Screen name="RecentExpenses" component={RecentExpenses} />

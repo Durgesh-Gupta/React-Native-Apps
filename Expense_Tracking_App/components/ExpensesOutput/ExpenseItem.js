@@ -1,10 +1,19 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
-import Colors from "../../constants/Colors"
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Colors from "../../constants/Colors";
 
-const ExpenseItem = ({description,amount,date}) => {
-    console.log(date.toString())
+const ExpenseItem = ({ description, amount, date }) => {
+  const navigation = useNavigation();
+  function expensePressHandler() {
+    navigation.navigate("ManageExpense");
+  }
+
   return (
+    <Pressable
+      onPress={expensePressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.expenseItem}>
         <View>
           <Text>{description}</Text>
@@ -14,20 +23,24 @@ const ExpenseItem = ({description,amount,date}) => {
           <Text>{amount}</Text>
         </View>
       </View>
+    </Pressable>
   );
 };
 
-const styles=StyleSheet.create({
-expenseItem:{
-    padding:12,
-    marginVertical:8,
-    backgroundColor:Colors.PrimaryText,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    elevation:3,
-    borderRadius:6,
-    shadowColor:Colors.Third,
-    shadowOffset:{width:1,height:1}
-}
-})
+const styles = StyleSheet.create({
+  expenseItem: {
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: Colors.PrimaryText,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    elevation: 3,
+    borderRadius: 6,
+    shadowColor: Colors.Third,
+    shadowOffset: { width: 1, height: 1 },
+  },
+  pressed: {
+    opacity: 0.6,
+  },
+});
 export default ExpenseItem;

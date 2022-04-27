@@ -8,6 +8,8 @@ import ManageExpense from "./screens/ManageExpense";
 import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
 import Colors from "./constants/Colors";
+import IconButton from "./components/UI/IconButton";
+import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -15,12 +17,20 @@ const BottomTabs = createBottomTabNavigator();
 function ExpensesOverview() {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={({navigation})=>({
         headerStyle: { backgroundColor: Colors.Primary },
         headerTintColor: Colors.TextHeading,
         tabBarStyle: { backgroundColor: Colors.Primary },
         tabBarActiveTintColor: Colors.Secondary,
-      }}
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="add"
+            size={24}
+            color={tintColor}
+            onPress={() => {navigation.navigate("ManageExpense")}}
+          />
+        ),
+      })}
     >
       <BottomTabs.Screen
         name="RecentExpenses"
